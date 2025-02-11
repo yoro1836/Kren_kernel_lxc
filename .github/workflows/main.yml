@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-kernel:
+    name: Build Kernel
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Build
+        uses: dabao1955/kernel_build_action@main
+        with:
+          kernel-url: https://github.com/yoro1836/Kren_kernel
+          kernel-branch: S908EXXUBEXK5
+          config: kren_defconfig
+          arch: arm64
+          aosp-gcc: true
+          aosp-clang: true
+          android-version: 12
+          aosp-clang-version: r416183b
+          ksu-other: true
+          ksu-url: https://github.com/rsuntk/KernelSU
+          lxc: true
+          ccache: true
+          access-token: ${{ secrets.GH_TOKEN }}
+          release: https://github.com/yoro1836/Kren_kernel_lxc
+          anykernel3: true
